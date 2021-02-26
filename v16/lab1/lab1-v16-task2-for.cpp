@@ -18,16 +18,36 @@ int main()
   
   std::cout << std::endl << "Function values will be below\n" << std::endl;
   
+  double avg = 0, max;
+  
   for (int i = 0; i < n; ++i)
   {
-    double x = a + i * h,
-      p = sqrtf((1 / x) * (powf(x, 2) - 1)), 
-      q = powf(cosf(abs(x) / 3.), 2),
-      r = log10(1 / (x + 1)),
-      y = p * q + r; 
+    double x = a + i * h;
+    
+    if ((x != 0) && (x != 1))
+    {    
+        double p = sqrtf((1 / x) * (powf(x, 2) - 1)), 
+          q = powf(cosf(abs(x) / 3.), 2),
+          r = log10(1 / (x + 1)),
+          y = p * q + r;
+        
+        if ((i == 0) || (y > max))
+        {
+            max = y;
+        }
+        
+        avg += y;
+        std::cout << "x = " << x << "\t\ty = " << y << std::endl;
+        } else {
+            std::cout << "Incorrect value. Zero division is not allowed!" << std::endl; 
+        }
+    }
       
-    std::cout << "x = " << x << "\t\ty = " << y << std::endl;
-  }
+      avg /= n;
+      
+      std::cout << std::endl;
+      std::cout << "Average equals " << avg << std::endl;
+      std::cout << "Max value is " << max << std::endl;
    
   return 0;
 }
